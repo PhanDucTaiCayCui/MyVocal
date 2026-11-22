@@ -40,6 +40,7 @@ class _AddWordScreenState extends ConsumerState<AddWordScreen> {
   String? _duplicateWarning;
   String? _dictionaryNotice;
   List<String> _englishDefinitions = [];
+  List<String> _vietnameseMeanings = [];
 
   bool get isEditMode => widget.wordToEdit != null;
 
@@ -144,12 +145,22 @@ class _AddWordScreenState extends ConsumerState<AddWordScreen> {
           if (_exampleController.text.trim().isEmpty && result.example != null) {
             _exampleController.text = result.example!;
           }
+          // Auto-fill Vietnamese translation
+          if (_meaningViController.text.trim().isEmpty && result.meaningVi != null) {
+            _meaningViController.text = result.meaningVi!;
+          }
+          // Auto-fill notes with translated example
+          if (_notesController.text.trim().isEmpty && result.exampleVi != null) {
+            _notesController.text = 'Dịch ví dụ: ${result.exampleVi!}';
+          }
           _englishDefinitions = result.definitions;
-          _dictionaryNotice = 'Đã tra từ thành công từ từ điển trực tuyến.';
+          _vietnameseMeanings = result.vietnameseMeanings;
+          _dictionaryNotice = 'Đã tra từ & tự động dịch nghĩa tiếng Việt thành công.';
         });
       } else {
         setState(() {
           _englishDefinitions = [];
+          _vietnameseMeanings = [];
           if (!auto) {
             _dictionaryNotice =
                 'Không tìm thấy từ "$query" trong từ điển trực tuyến. Bạn có thể tự nhập dữ liệu bên dưới.';
@@ -160,6 +171,7 @@ class _AddWordScreenState extends ConsumerState<AddWordScreen> {
       if (mounted) {
         setState(() {
           _englishDefinitions = [];
+          _vietnameseMeanings = [];
           if (!auto) {
             _dictionaryNotice =
                 'Không thể kết nối từ điển trực tuyến (ngoại tuyến). Bạn có thể tự nhập dữ liệu bên dưới.';
@@ -497,6 +509,49 @@ class _AddWordScreenState extends ConsumerState<AddWordScreen> {
                             return null;
                           },
                         ),
+                        if (_vietnameseMeanings.isNotEmpty) ...[
+                          const SizedBox(height: 10),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.translate,
+                                size: 16,
+                                color: theme.colorScheme.primary,
+                              ),
+                              const SizedBox(width: 6),
+                              Text(
+                                'Gợi ý nghĩa tiếng Việt (chạm để chọn):',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.bold,
+                                  color: theme.colorScheme.primary,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 6),
+                          Wrap(
+                            spacing: 6,
+                            runSpacing: 4,
+                            children: _vietnameseMeanings.map((viMeaning) {
+                              final isSelected = _meaningViController.text
+                                      .trim()
+                                      .toLowerCase() ==
+                                  viMeaning.trim().toLowerCase();
+                              return ActionChip(
+                                avatar: isSelected
+                                    ? const Icon(Icons.check, size: 14)
+                                    : null,
+                                label: Text(viMeaning),
+                                onPressed: () {
+                                  setState(() {
+                                    _meaningViController.text = viMeaning;
+                                  });
+                                },
+                              );
+                            }).toList(),
+                          ),
+                        ],
                         const SizedBox(height: 12),
                         TextFormField(
                           controller: _exampleController,
