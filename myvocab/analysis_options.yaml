@@ -1,0 +1,12 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - build/**
+    - android/**
+    - "**/*.g.dart"
+  errors:
+    deprecated_member_use: ignore
+
+linter:
+  rules:

@@ -1,0 +1,39 @@
+name: myvocab
+description: "MyVocab - Offline-first English vocabulary learning app"
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.14.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.8
+  drift: ^2.24.0
+  sqlite3_flutter_libs: ^0.5.28
+  path_provider: ^2.1.5
+  path: ^1.9.0
+  flutter_riverpod: ^2.6.1
+  dio: ^5.8.0+1
+  flutter_tts: ^4.2.2
+  flutter_local_notifications: ^18.0.1
+  timezone: ^0.10.0
+  home_widget: ^0.7.0
+  fl_chart: ^0.69.0
+  share_plus: ^10.1.3
+  file_picker: ^8.1.7
+
+dependency_overrides:
+  flutter_plugin_android_lifecycle: 2.0.24
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  drift_dev: ^2.24.0
+  build_runner: ^2.4.15
+
+flutter:
+  uses-material-design: true
