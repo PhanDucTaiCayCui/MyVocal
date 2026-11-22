@@ -4,7 +4,7 @@ import 'package:home_widget/home_widget.dart';
 import '../data/database.dart';
 
 class WidgetService {
-  static const String androidWidgetName = 'HomeWidgetProvider';
+  static const String androidWidgetName = 'MyVocabWidgetProvider';
 
   Future<void> updateWidget(AppDatabase db) async {
     try {

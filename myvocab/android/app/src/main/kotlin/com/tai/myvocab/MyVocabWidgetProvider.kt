@@ -8,7 +8,7 @@ import android.content.SharedPreferences
 import android.widget.RemoteViews
 import es.antonborri.home_widget.HomeWidgetProvider
 
-class HomeWidgetProvider : HomeWidgetProvider() {
+class MyVocabWidgetProvider : HomeWidgetProvider() {
     override fun onUpdate(
         context: Context,
         appWidgetManager: AppWidgetManager,

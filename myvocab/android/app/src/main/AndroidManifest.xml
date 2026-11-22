@@ -5,7 +5,7 @@
     <uses-permission android:name="android.permission.USE_EXACT_ALARM"/>
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <application
-        android:label="myvocab"
+        android:label="MyVocab"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -41,7 +41,7 @@
             </intent-filter>
         </activity>
         <receiver
-            android:name=".HomeWidgetProvider"
+            android:name=".MyVocabWidgetProvider"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />

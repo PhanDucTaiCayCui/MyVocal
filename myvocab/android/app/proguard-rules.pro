@@ -1,0 +1,6 @@
+-keep class com.tai.myvocab.** { *; }
+-keep class es.antonborri.home_widget.** { *; }
+-keep class com.dexterous.flutterlocalnotifications.** { *; }
+-keep class org.sqlite.** { *; }
+-keep class io.flutter.** { *; }
+-dontwarn java.awt.**
